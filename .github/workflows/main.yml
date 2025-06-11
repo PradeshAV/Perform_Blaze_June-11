@@ -5,20 +5,20 @@ on: [push]
 jobs:
   run-jmeter:
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # ✅ Avoid indefinite hangs
+    timeout-minutes: 15
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: List Directory for Debugging  # ✅ Optional but useful
+      - name: List Directory for Debugging
         run: ls -R
 
       - name: PerfAction for JMeter
         uses: QAInsights/PerfAction@v5.6.3
         with:
           test-plan-path: './BlazeDemo_June 11.jmx'
-          results-file: 'results.jtl'
+          results-file-path: 'results.jtl'  # ✅ Corrected key
           args: '-Jthreads=10 -Jduration=60'
 
       - name: Upload JMeter Results
